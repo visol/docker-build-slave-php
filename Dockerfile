@@ -19,6 +19,7 @@ RUN docker-php-ext-install soap
 
 RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --filename=composer --install-dir=/usr/bin
 
+RUN echo 'export PATH=~/.composer/vendor/bin:$PATH' >> ~/.bashrc
 RUN composer global require "squizlabs/php_codesniffer=*"
 RUN composer global require "hirak/prestissimo"
 
