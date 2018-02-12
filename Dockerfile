@@ -11,11 +11,19 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # soap
-RUN apt-get update \
-    && apt-get install -y \
-        libxml2-dev \
+RUN buildRequirements="libxml2-dev" \
+    && apt-get update && apt-get install -y ${buildRequirements} \
+    && docker-php-ext-install soap \
+    && apt-get purge -y ${buildRequirements} \
     && rm -rf /var/lib/apt/lists/*
-RUN docker-php-ext-install soap
+
+# gd
+RUN buildRequirements="libpng12-dev libjpeg-dev libfreetype6-dev" \
+    && apt-get update && apt-get install -y ${buildRequirements} \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib \
+    && docker-php-ext-install gd \
+    && apt-get purge -y ${buildRequirements} \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --filename=composer --install-dir=/usr/bin
 
