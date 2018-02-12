@@ -50,4 +50,9 @@ RUN apt-get update \
         ruby-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN gem install compass
+RUN apt-get update \
+    && apt-get install -y \
+        automake \
+        libtool \
+    && rm -rf /var/lib/apt/lists/* \
+    && gem install compass
