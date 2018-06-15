@@ -25,6 +25,15 @@ RUN buildRequirements="libpng12-dev libjpeg-dev libfreetype6-dev" \
     && apt-get purge -y ${buildRequirements} \
     && rm -rf /var/lib/apt/lists/*
 
+# intl
+RUN buildRequirements="libicu-dev g++" \
+    && apt-get update && apt-get install -y ${buildRequirements} \
+    && docker-php-ext-install intl \
+    && apt-get purge -y ${buildRequirements} \
+    && runtimeRequirements="libicu52" \
+    && apt-get install -y --auto-remove ${runtimeRequirements} \
+    && rm -rf /var/lib/apt/lists/*
+
 # zip
 RUN docker-php-ext-install zip
 
