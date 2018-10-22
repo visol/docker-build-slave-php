@@ -22,7 +22,6 @@ RUN buildRequirements="libpng-dev libjpeg-dev libfreetype6-dev" \
     && apt-get update && apt-get install -y ${buildRequirements} \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib \
     && docker-php-ext-install gd \
-    && apt-get purge -y ${buildRequirements} \
     && rm -rf /var/lib/apt/lists/*
 
 # intl
@@ -30,12 +29,16 @@ RUN buildRequirements="libicu-dev g++" \
     && apt-get update && apt-get install -y ${buildRequirements} \
     && docker-php-ext-install intl \
     && apt-get purge -y ${buildRequirements} \
-    && runtimeRequirements="libicu52" \
+    && runtimeRequirements="libicu57" \
     && apt-get install -y --auto-remove ${runtimeRequirements} \
     && rm -rf /var/lib/apt/lists/*
 
 # zip
-RUN docker-php-ext-install zip
+RUN buildRequirements="zlib1g-dev" \
+    && apt-get update && apt-get install -y ${buildRequirements} \
+    && docker-php-ext-install zip \
+    && apt-get purge -y ${buildRequirements} \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --filename=composer --install-dir=/usr/bin
 
@@ -43,6 +46,10 @@ RUN echo 'export PATH=~/.composer/vendor/bin:$PATH' >> ~/.bashrc
 RUN composer global require "squizlabs/php_codesniffer=*"
 RUN composer global require "hirak/prestissimo"
 
+RUN apt-get update \
+    && apt-get install -y \
+        gnupg \
+    && rm -rf /var/lib/apt/lists/*
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get update \
     && apt-get install -y nodejs \
