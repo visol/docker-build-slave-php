@@ -35,7 +35,7 @@ RUN buildRequirements="libicu-dev g++" \
     && rm -rf /var/lib/apt/lists/*
 
 # zip
-RUN buildRequirements="zlib1g-dev" \
+RUN buildRequirements="zlib1g-dev libzip-dev" \
     && apt-get update && apt-get install -y ${buildRequirements} \
     && docker-php-ext-install zip \
     && apt-get purge -y ${buildRequirements} \
