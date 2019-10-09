@@ -40,7 +40,7 @@ RUN buildRequirements="zlib1g-dev" \
     && apt-get purge -y ${buildRequirements} \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --filename=composer --install-dir=/usr/bin
+RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer -O - -q | php -- --filename=composer --install-dir=/usr/bin
 
 RUN echo 'export PATH=~/.composer/vendor/bin:$PATH' >> ~/.bashrc
 RUN composer global require "squizlabs/php_codesniffer=*"
