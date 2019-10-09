@@ -1,4 +1,4 @@
-FROM php:7.4-cli
+FROM php:7.3-cli
 MAINTAINER Jonas Renggli <jonas.renggli@visol.ch>
 
 RUN apt-get update \
