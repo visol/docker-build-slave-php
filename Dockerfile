@@ -29,7 +29,7 @@ RUN buildRequirements="libicu-dev g++" \
     && apt-get update && apt-get install -y ${buildRequirements} \
     && docker-php-ext-install intl \
     && apt-get purge -y ${buildRequirements} \
-    && runtimeRequirements="libicu57" \
+    && runtimeRequirements="libicu63" \
     && apt-get install -y --auto-remove ${runtimeRequirements} \
     && rm -rf /var/lib/apt/lists/*
 
