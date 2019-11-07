@@ -77,3 +77,10 @@ RUN apt-get update \
         libtool \
     && rm -rf /var/lib/apt/lists/* \
     && gem install compass
+
+RUN apt-get update \
+    && apt-get install -y \
+        build-essential \
+        g++ \
+    && rm -rf /var/lib/apt/lists/*
+
