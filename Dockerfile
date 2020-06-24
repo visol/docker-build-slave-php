@@ -6,6 +6,7 @@ RUN apt-get update \
         git \
         wget \
         unzip \
+        p7zip-full \
         rsync \
         openssh-client \
     && rm -rf /var/lib/apt/lists/*
