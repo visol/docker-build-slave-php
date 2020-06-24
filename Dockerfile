@@ -21,7 +21,7 @@ RUN buildRequirements="libxml2-dev" \
 # gd
 RUN buildRequirements="libpng-dev libjpeg-dev libfreetype6-dev" \
     && apt-get update && apt-get install -y ${buildRequirements} \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include \
     && docker-php-ext-install gd \
     && rm -rf /var/lib/apt/lists/*
 
