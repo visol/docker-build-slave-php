@@ -58,7 +58,7 @@ RUN apt-get update \
     && apt-get install -y \
         gnupg \
     && rm -rf /var/lib/apt/lists/* \
-    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get update \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
