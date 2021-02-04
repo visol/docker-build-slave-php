@@ -2,6 +2,11 @@ FROM php:7.4-cli
 MAINTAINER Jonas Renggli <jonas.renggli@visol.ch>
 
 RUN apt-get update \
+    && apt-get full-upgrade -y \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update \
     && apt-get install -y \
         git \
         wget \
@@ -9,7 +14,9 @@ RUN apt-get update \
         p7zip-full \
         rsync \
         openssh-client \
+        gnupg \
     && rm -rf /var/lib/apt/lists/*
+RUN apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
 
 # soap
 RUN buildRequirements="libxml2-dev" \
