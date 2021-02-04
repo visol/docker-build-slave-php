@@ -48,11 +48,10 @@ RUN buildRequirements="zlib1g-dev libzip-dev" \
     && apt-get purge -y ${buildRequirements} \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer -O - -q | php -- --filename=composer --install-dir=/usr/bin --version=1.10.20
+RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer -O - -q | php -- --filename=composer --install-dir=/usr/bin
 
 RUN echo 'export PATH=~/.composer/vendor/bin:$PATH' >> ~/.bashrc
 RUN composer global require "squizlabs/php_codesniffer=*"
-RUN composer global require "hirak/prestissimo"
 
 # node.js, npm
 RUN apt-get update \
